@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Two-Stage Speech Enhancement Using Gated Convolutions | Listening Examples</title>
+    <meta name="robots" content="noindex" />
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+	</script>
+	<script type="text/javascript"
+	  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+	
+	<style>
+	.grid-container {
+	  display: grid;
+	  grid-template-columns: auto auto auto auto auto;
+	  grid-gap: 10px;
+	  background-color: rgba(255, 255, 255, 0.1);
+	  padding: 10px;
+	}
+
+	.grid-container > div {
+	  background-color: rgba(255, 255, 255, 0.2);
+	  padding: 0 0;
+	}
+
+	.item1 {
+	  text-align: center;
+	  font-size: 24px;
+	  font-weight: bold;
+	}
+	
+	.item2 {
+	  text-align: center;
+	  font-size: 18px;
+	}
+
+	</style>
+
+  </head>
+
+  <body>
+
+    <h1>Two-Stage Speech Enhancement Using Gated Convolutions | Listening Examples</h1>
+
+    <p>We used speakers and noises from the mismatched test set for all audio examples, i.e., both have not been seen by the deep neural networks (DNNs) before. The clean speech signals were taken from the VCTK database [1] and the noise signals from the PNL 100 Non-Speech Sounds database [2].</p>
+	
+	<p>The following methods were used to determine the estimated speech magnitude spectrum $|\hat{S}|$:
+	<ul>
+	  <li>CRNN: Use a convolutional recurrent neural network as described in [4] for direct estimation of $|\hat{S}|$.</li>
+	  <li>PConv: Two-stage speech enhancement using our proposed model $\mathcal{M}_{\text{SMM}^\star}$ [5] for mask estimation and the partial convolution-based architecture from [3] for inpainting.</li>
+	  <li>$\mathcal{M}_{\text{SMM}^\star}$: Use the estimated soft mask from our proposed masking model $\mathcal{M}_{\text{SMM}^\star}$ for masking, i.e., skip the inpainting stage (see [5]).</li>
+	  <li>Proposed: Two-stage speech enhancement using our proposed model $\mathcal{M}_{\text{SMM}^\star}$ for mask estimation and our proposed gated convolution-based architecture for inpainting (see [5]).</li>
+	</ul>
+	Afterwards the estimated speech magnitude spectrum $|\hat{S}|$ and the noisy phase spectrum $\phi$ are combined and passed into an inverse short-time Fourier transform (ISTFT) in oder to achieve the enhanced signal $\hat{s}$.
+	It is worth noting that all models were trained using the same training set.</p>
+	
+	<br>
+    
+    <h2>p226_003_n11_0dB_SNR.wav</h2>
+	
+	<div class="grid-container">
+		<div class="item1"></div>
+		<div class="item1">CRNN [4]</div>  
+		<div class="item1">PConv [3]</div>
+		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
+		<div class="item1">Proposed [5]</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p226_003_n11_0dB_SNR_uncorrupted.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>(Clean speech signal)<br><br>
+			<audio controls>
+				<source src="p226_003_n11_0dB_SNR_noisy.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>(Noisy speech signal)
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p226_003_n11_0dB_SNR_crnn.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p226_003_n11_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.0$)<br><br>
+			<audio controls>
+				<source src="p226_003_n11_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.1$)<br><br>
+			<audio controls>
+				<source src="p226_003_n11_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.5$)
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p226_003_n11_0dB_SNR_masked.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p226_003_n11_0dB_SNR_gatedconv.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+	</div>
+	
+	
+	<br>
+	
+	<h2>References</h2>
+	[1] Christophe Veaux, Junichi Yamagishi, and Kirsten MacDonald, “CSTR VCTK corpus: English multi-speaker corpus for CSTR voice cloning toolkit,” 2017.<br>
+	[2] Guoning Hu and DeLiangWang, “A tandem algorithm for pitch estimation and voiced speech segregation,” in IEEE Transactions on Audio, Speech, and Language Processing, vol. 18, no.8, pp. 2067-2079, 2010.<br>
+	[3] Xiang Hao, Xiangdong Su, Shixue Wen, Zhiyu Wang, Yiqian Pan, Feilong Bao, and Wei Chen, “Masking and inpainting: A two-stage speech enhancement approach for low SNR and non-stationary noise,” in IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2020, pp. 6959–6963.<br>
+	[4] Ke Tan and DeLiang Wang, “A convolutional recurrent neural network for real-time speech enhancement,” in Interspeech, 2018, pp. 3229–3233.<br>
+	[5] Lars Thieling and Peter Jax, “Two-Stage Speech Enhancement Using Gated Convolutions,” (Submitted to IWAENC2022).<br>
+  </body>
+</html>
