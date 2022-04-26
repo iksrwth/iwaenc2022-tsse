@@ -36,6 +36,16 @@
 	  text-align: center;
 	  font-size: 18px;
 	}
+	
+	h2 {
+	   text-align: center;
+	}
+	
+	hr {
+	  border: 0;
+	  height: 1px;
+	  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+	}
 
 	</style>
 
@@ -58,8 +68,8 @@
 	It is worth noting that all models were trained using the same training set.</p>
 	
 	<br>
-    
-    <h2>p226_003_n11_0dB_SNR.wav</h2>
+    <hr>
+    <h2>Clean speech p226_003 mixed with noise n11 at 0dB SNR</h2>
 	
 	<div class="grid-container">
 		<div class="item1"></div>
@@ -113,6 +123,401 @@
 	
 	
 	<br>
+    <hr>
+    
+    <h2>Clean speech p240_003 mixed with noise n12 at 0dB SNR</h2>
+	
+	<div class="grid-container">
+		<div class="item1"></div>
+		<div class="item1">CRNN [4]</div>  
+		<div class="item1">PConv [3]</div>
+		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
+		<div class="item1">Proposed [5]</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p240_003_n12_0dB_SNR_uncorrupted.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>(Clean speech signal)<br><br>
+			<audio controls>
+				<source src="p240_003_n12_0dB_SNR_noisy.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>(Noisy speech signal)
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p240_003_n12_0dB_SNR_crnn.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p240_003_n12_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.0$)<br><br>
+			<audio controls>
+				<source src="p240_003_n12_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.1$)<br><br>
+			<audio controls>
+				<source src="p240_003_n12_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.5$)
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p240_003_n12_0dB_SNR_masked.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p240_003_n12_0dB_SNR_gatedconv.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+	</div>
+	
+	
+	<br>
+    <hr>
+    
+    <h2>Clean speech p226_003 mixed with noise n28 at 0dB SNR</h2>
+	
+	<div class="grid-container">
+		<div class="item1"></div>
+		<div class="item1">CRNN [4]</div>  
+		<div class="item1">PConv [3]</div>
+		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
+		<div class="item1">Proposed [5]</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p226_003_n28_0dB_SNR_uncorrupted.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>(Clean speech signal)<br><br>
+			<audio controls>
+				<source src="p226_003_n28_0dB_SNR_noisy.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>(Noisy speech signal)
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p226_003_n28_0dB_SNR_crnn.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p226_003_n28_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.0$)<br><br>
+			<audio controls>
+				<source src="p226_003_n28_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.1$)<br><br>
+			<audio controls>
+				<source src="p226_003_n28_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.5$)
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p226_003_n28_0dB_SNR_masked.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p226_003_n28_0dB_SNR_gatedconv.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+	</div>
+	
+	
+	
+	<br>
+    <hr>
+    
+    <h2>Clean speech p240_003 mixed with noise n40 at 0dB SNR</h2>
+	
+	<div class="grid-container">
+		<div class="item1"></div>
+		<div class="item1">CRNN [4]</div>  
+		<div class="item1">PConv [3]</div>
+		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
+		<div class="item1">Proposed [5]</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p240_003_n40_0dB_SNR_uncorrupted.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>(Clean speech signal)<br><br>
+			<audio controls>
+				<source src="p240_003_n40_0dB_SNR_noisy.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>(Noisy speech signal)
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p240_003_n40_0dB_SNR_crnn.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p240_003_n40_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.0$)<br><br>
+			<audio controls>
+				<source src="p240_003_n40_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.1$)<br><br>
+			<audio controls>
+				<source src="p240_003_n40_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.5$)
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p240_003_n40_0dB_SNR_masked.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p240_003_n40_0dB_SNR_gatedconv.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+	</div>
+	
+	
+	<br>
+    <hr>
+    
+    <h2>Clean speech p226_003 mixed with noise n54 at 0dB SNR</h2>
+	
+	<div class="grid-container">
+		<div class="item1"></div>
+		<div class="item1">CRNN [4]</div>  
+		<div class="item1">PConv [3]</div>
+		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
+		<div class="item1">Proposed [5]</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p226_003_n54_0dB_SNR_uncorrupted.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>(Clean speech signal)<br><br>
+			<audio controls>
+				<source src="p226_003_n54_0dB_SNR_noisy.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>(Noisy speech signal)
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p226_003_n54_0dB_SNR_crnn.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p226_003_n54_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.0$)<br><br>
+			<audio controls>
+				<source src="p226_003_n54_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.1$)<br><br>
+			<audio controls>
+				<source src="p226_003_n54_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.5$)
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p226_003_n54_0dB_SNR_masked.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p226_003_n54_0dB_SNR_gatedconv.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+	</div>
+	
+	
+	<br>
+    <hr>
+    
+    <h2>Clean speech p240_003 mixed with noise n67 at 0dB SNR</h2>
+	
+	<div class="grid-container">
+		<div class="item1"></div>
+		<div class="item1">CRNN [4]</div>  
+		<div class="item1">PConv [3]</div>
+		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
+		<div class="item1">Proposed [5]</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p240_003_n67_0dB_SNR_uncorrupted.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>(Clean speech signal)<br><br>
+			<audio controls>
+				<source src="p240_003_n67_0dB_SNR_noisy.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>(Noisy speech signal)
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p240_003_n67_0dB_SNR_crnn.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p240_003_n67_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.0$)<br><br>
+			<audio controls>
+				<source src="p240_003_n67_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.1$)<br><br>
+			<audio controls>
+				<source src="p240_003_n67_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.5$)
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p240_003_n67_0dB_SNR_masked.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p240_003_n67_0dB_SNR_gatedconv.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+	</div>
+	
+	
+	
+	<br>
+    <hr>
+    
+    <h2>Clean speech p226_003 mixed with noise n77 at 0dB SNR</h2>
+	
+	<div class="grid-container">
+		<div class="item1"></div>
+		<div class="item1">CRNN [4]</div>  
+		<div class="item1">PConv [3]</div>
+		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
+		<div class="item1">Proposed [5]</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p226_003_n77_0dB_SNR_uncorrupted.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>(Clean speech signal)<br><br>
+			<audio controls>
+				<source src="p226_003_n77_0dB_SNR_noisy.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>(Noisy speech signal)
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p226_003_n77_0dB_SNR_crnn.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p226_003_n77_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.0$)<br><br>
+			<audio controls>
+				<source src="p226_003_n77_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.1$)<br><br>
+			<audio controls>
+				<source src="p226_003_n77_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.5$)
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p226_003_n77_0dB_SNR_masked.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p226_003_n77_0dB_SNR_gatedconv.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+	</div>
+	
+	
+    
+	<br>
+    <hr>
+	
+    <h2>Clean speech p240_003 mixed with noise n85 at 0dB SNR</h2>
+	
+	<div class="grid-container">
+		<div class="item1"></div>
+		<div class="item1">CRNN [4]</div>  
+		<div class="item1">PConv [3]</div>
+		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
+		<div class="item1">Proposed [5]</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p240_003_n85_0dB_SNR_uncorrupted.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>(Clean speech signal)<br><br>
+			<audio controls>
+				<source src="p240_003_n85_0dB_SNR_noisy.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>(Noisy speech signal)
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p240_003_n85_0dB_SNR_crnn.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p240_003_n85_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.0$)<br><br>
+			<audio controls>
+				<source src="p240_003_n85_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.1$)<br><br>
+			<audio controls>
+				<source src="p240_003_n85_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.5$)
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p240_003_n85_0dB_SNR_masked.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+		<div class="item2">
+			<audio controls>
+				<source src="p240_003_n85_0dB_SNR_gatedconv.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+	</div>
+	
+	<br>
+    <hr>
 	
 	<h2>References</h2>
 	[1] Christophe Veaux, Junichi Yamagishi, and Kirsten MacDonald, “CSTR VCTK corpus: English multi-speaker corpus for CSTR voice cloning toolkit,” 2017.<br>
