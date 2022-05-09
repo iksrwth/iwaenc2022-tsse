@@ -11,45 +11,111 @@
 	<script type="text/javascript"
 	  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	
+	<script>
+		$(document).ready(function() {
+			var selectionList = document.querySelectorAll('[id^=selection_]');
+			for (let i = 0; i < selectionList.length; i++) {
+				let selection = selectionList[i];
+				$(selection).on('change', function() {
+					change($(this));
+				});
+			}
+		});
+
+
+		function change(selection) {
+			selectionId = selection.attr('id');
+			selectedSnr = selection.val();
+			
+			var audioList = document.querySelectorAll('[id^=' + selectionId.replace(/selection_/, 'player_') + ']');
+			var sourceList = document.querySelectorAll('[id^=' + selectionId.replace(/selection_/, 'src_') + ']');
+
+			for (let i = 0; i < audioList.length; i++) {
+				let audio = audioList[i];
+				let source = sourceList[i];
+				
+				audio.pause();
+
+				if (selectedSnr) {
+					source.src = source.src.replace(/_-?\d+dB_SNR/, "_" + selectedSnr + "dB_SNR");
+					audio.load();
+				}
+			}
+		}
+	</script>
 	
 	<style>
 	.grid-container {
-	  display: grid;
-	  grid-template-columns: auto auto auto auto auto;
-	  grid-gap: 10px;
-	  background-color: rgba(255, 255, 255, 0.1);
-	  padding: 10px;
+		display: grid;
+		grid-template-columns: auto auto auto auto auto;
+		grid-gap: 10px;
+		background-color: rgba(255, 255, 255, 0.1);
+		padding: 10px;
 	}
 
 	.grid-container > div {
-	  background-color: rgba(255, 255, 255, 0.2);
-	  padding: 0 0;
+		background-color: rgba(255, 255, 255, 0.2);
+		padding: 0 0;
 	}
 
 	.item1 {
-	  text-align: center;
-	  font-size: 24px;
-	  font-weight: bold;
+		text-align: center;
+		font-size: 20px;
+		font-weight: bold;
+		font-family: serif;
 	}
 	
 	.item2 {
-	  text-align: center;
-	  font-size: 18px;
+		text-align: center;
+		font-size: 16px;
+		font-family: serif;
 	}
 	
 	h2 {
-	   text-align: center;
+		text-align: center;
+		font-size: 24px;
+		font-weight: bold;
+		font-family: serif;
 	}
 	
 	hr {
-	  border: 0;
-	  height: 1px;
-	  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+		border: 0;
+		height: 1px;
+		background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+	}
+	
+	select {
+		background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8nwYAAmoBZ0eMiB8AAAAASUVORK5CYII=) repeat;
+		border: none;
+		border-radius: 3px;
+		box-shadow: 2px 2px 5px 1px rgba(0,0,0,.15);
+		width: 50px;
+		cursor: pointer;
+		font-size: 24px;
+		font-weight: bold;
+		font-family: serif;
+		text-align: center;
+	}
+
+	select option {
+		color: #666;
+	}
+
+	select::-ms-expand {
+		display: none;
+	}
+
+	select:focus::-ms-value {
+		background-color: transparent;
 	}
 
 	</style>
 
   </head>
+  
+  
 
   <body>
 
@@ -67,9 +133,15 @@
 	Afterwards the estimated speech magnitude spectrum $|\hat{S}|$ and the noisy phase spectrum $\phi$ are combined and passed into an inverse short-time Fourier transform (ISTFT) in oder to achieve the enhanced signal $\hat{s}$.
 	It is worth noting that all models were trained using the same training set.</p>
 	
+	<p><b>Note: Please enable Javascript for this website to work properly.</b></p>
+	
 	<br>
     <hr>
-    <h2>Clean speech p226_003 mixed with noise n11 at 0dB SNR</h2>
+    <h2>Clean speech p226_003 mixed with noise n11 at <select id="selection_p226_003_n11">
+	  <option value="-7">-7</option>
+	  <option value="0" selected="selected">0</option>
+	  <option value="7">7</option>
+	</select> dB SNR</h2>
 	
 	<div class="grid-container">
 		<div class="item1">Original</div>
@@ -78,44 +150,44 @@
 		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
 		<div class="item1">Proposed [5]</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p226_003_n11_0dB_SNR_uncorrupted.wav" type="audio/wav">
+			<audio id="player_p226_003_n11_uncorrupted" controls="controls">
+				<source id="src_p226_003_n11_uncorrupted" src="p226_003_n11_0dB_SNR_uncorrupted.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>(Clean speech signal)<br><br>
-			<audio controls>
-				<source src="p226_003_n11_0dB_SNR_noisy.wav" type="audio/wav">
+			<audio id="player_p226_003_n11_noisy" controls="controls">
+				<source id="src_p226_003_n11_noisy" src="p226_003_n11_0dB_SNR_noisy.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>(Noisy speech signal)
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p226_003_n11_0dB_SNR_crnn.wav" type="audio/wav">
+			<audio id="player_p226_003_n11_crnn" controls="controls">
+				<source id="src_p226_003_n11_crnn" src="p226_003_n11_0dB_SNR_crnn.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p226_003_n11_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
+			<audio id="player_p226_003_n11_pconv_1" controls="controls">
+				<source id="src_p226_003_n11_pconv_1" src="p226_003_n11_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.0$)<br><br>
-			<audio controls>
-				<source src="p226_003_n11_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
+			<audio id="player_p226_003_n11_pconv_2" controls="controls">
+				<source id="src_p226_003_n11_pconv_2" src="p226_003_n11_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.1$)<br><br>
-			<audio controls>
-				<source src="p226_003_n11_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
+			<audio id="player_p226_003_n11_pconv_6" controls="controls">
+				<source id="src_p226_003_n11_pconv_6" src="p226_003_n11_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.5$)
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p226_003_n11_0dB_SNR_masked.wav" type="audio/wav">
+			<audio id="player_p226_003_n11_masked" controls="controls">
+				<source id="src_p226_003_n11_masked" src="p226_003_n11_0dB_SNR_masked.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p226_003_n11_0dB_SNR_gatedconv.wav" type="audio/wav">
+			<audio id="player_p226_003_n11_gatedconv" controls="controls">
+				<source id="src_p226_003_n11_gatedconv" src="p226_003_n11_0dB_SNR_gatedconv.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
@@ -125,7 +197,11 @@
 	<br>
     <hr>
     
-    <h2>Clean speech p240_003 mixed with noise n12 at 0dB SNR</h2>
+    <h2>Clean speech p240_003 mixed with noise n12 at <select id="selection_p240_003_n12">
+	  <option value="-7">-7</option>
+	  <option value="0" selected="selected">0</option>
+	  <option value="7">7</option>
+	</select> dB SNR</h2>
 	
 	<div class="grid-container">
 		<div class="item1">Original</div>
@@ -134,44 +210,44 @@
 		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
 		<div class="item1">Proposed [5]</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p240_003_n12_0dB_SNR_uncorrupted.wav" type="audio/wav">
+			<audio id="player_p240_003_n12_uncorrupted" controls="controls">
+				<source id="src_p240_003_n12_uncorrupted" src="p240_003_n12_0dB_SNR_uncorrupted.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>(Clean speech signal)<br><br>
-			<audio controls>
-				<source src="p240_003_n12_0dB_SNR_noisy.wav" type="audio/wav">
+			<audio id="player_p240_003_n12_noisy" controls="controls">
+				<source id="src_p240_003_n12_noisy" src="p240_003_n12_0dB_SNR_noisy.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>(Noisy speech signal)
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p240_003_n12_0dB_SNR_crnn.wav" type="audio/wav">
+			<audio id="player_p240_003_n12_crnn" controls="controls">
+				<source id="src_p240_003_n12_crnn" src="p240_003_n12_0dB_SNR_crnn.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p240_003_n12_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
+			<audio id="player_p240_003_n12_pconv_1" controls="controls">
+				<source id="src_p240_003_n12_pconv_1" src="p240_003_n12_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.0$)<br><br>
-			<audio controls>
-				<source src="p240_003_n12_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
+			<audio id="player_p240_003_n12_pconv_2" controls="controls">
+				<source id="src_p240_003_n12_pconv_2" src="p240_003_n12_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.1$)<br><br>
-			<audio controls>
-				<source src="p240_003_n12_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
+			<audio id="player_p240_003_n12_pconv_6" controls="controls">
+				<source id="src_p240_003_n12_pconv_6" src="p240_003_n12_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.5$)
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p240_003_n12_0dB_SNR_masked.wav" type="audio/wav">
+			<audio id="player_p240_003_n12_masked" controls="controls">
+				<source id="src_p240_003_n12_masked" src="p240_003_n12_0dB_SNR_masked.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p240_003_n12_0dB_SNR_gatedconv.wav" type="audio/wav">
+			<audio id="player_p240_003_n12_gatedconv" controls="controls">
+				<source id="src_p240_003_n12_gatedconv" src="p240_003_n12_0dB_SNR_gatedconv.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
@@ -181,7 +257,11 @@
 	<br>
     <hr>
     
-    <h2>Clean speech p226_003 mixed with noise n28 at 0dB SNR</h2>
+    <h2>Clean speech p226_003 mixed with noise n28 at <select id="selection_p226_003_n28">
+	  <option value="-7">-7</option>
+	  <option value="0" selected="selected">0</option>
+	  <option value="7">7</option>
+	</select> dB SNR</h2>
 	
 	<div class="grid-container">
 		<div class="item1">Original</div>
@@ -190,101 +270,44 @@
 		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
 		<div class="item1">Proposed [5]</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p226_003_n28_0dB_SNR_uncorrupted.wav" type="audio/wav">
+			<audio id="player_p226_003_n28_uncorrupted" controls="controls">
+				<source id="src_p226_003_n28_uncorrupted" src="p226_003_n28_0dB_SNR_uncorrupted.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>(Clean speech signal)<br><br>
-			<audio controls>
-				<source src="p226_003_n28_0dB_SNR_noisy.wav" type="audio/wav">
+			<audio id="player_p226_003_n28_noisy" controls="controls">
+				<source id="src_p226_003_n28_noisy" src="p226_003_n28_0dB_SNR_noisy.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>(Noisy speech signal)
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p226_003_n28_0dB_SNR_crnn.wav" type="audio/wav">
+			<audio id="player_p226_003_n28_crnn" controls="controls">
+				<source id="src_p226_003_n28_crnn" src="p226_003_n28_0dB_SNR_crnn.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p226_003_n28_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
+			<audio id="player_p226_003_n28_pconv_1" controls="controls">
+				<source id="src_p226_003_n28_pconv_1" src="p226_003_n28_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.0$)<br><br>
-			<audio controls>
-				<source src="p226_003_n28_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
+			<audio id="player_p226_003_n28_pconv_2" controls="controls">
+				<source id="src_p226_003_n28_pconv_2" src="p226_003_n28_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.1$)<br><br>
-			<audio controls>
-				<source src="p226_003_n28_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
+			<audio id="player_p226_003_n28_pconv_6" controls="controls">
+				<source id="src_p226_003_n28_pconv_6" src="p226_003_n28_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.5$)
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p226_003_n28_0dB_SNR_masked.wav" type="audio/wav">
+			<audio id="player_p226_003_n28_masked" controls="controls">
+				<source id="src_p226_003_n28_masked" src="p226_003_n28_0dB_SNR_masked.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p226_003_n28_0dB_SNR_gatedconv.wav" type="audio/wav">
-				Your browser does not support the audio element.
-			</audio>
-		</div>
-	</div>
-	
-	
-	
-	<br>
-    <hr>
-    
-    <h2>Clean speech p240_003 mixed with noise n40 at 0dB SNR</h2>
-	
-	<div class="grid-container">
-		<div class="item1">Original</div>
-		<div class="item1">CRNN [4]</div>  
-		<div class="item1">PConv [3]</div>
-		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
-		<div class="item1">Proposed [5]</div>
-		<div class="item2">
-			<audio controls>
-				<source src="p240_003_n40_0dB_SNR_uncorrupted.wav" type="audio/wav">
-				Your browser does not support the audio element.
-			</audio><br>(Clean speech signal)<br><br>
-			<audio controls>
-				<source src="p240_003_n40_0dB_SNR_noisy.wav" type="audio/wav">
-				Your browser does not support the audio element.
-			</audio><br>(Noisy speech signal)
-		</div>
-		<div class="item2">
-			<audio controls>
-				<source src="p240_003_n40_0dB_SNR_crnn.wav" type="audio/wav">
-				Your browser does not support the audio element.
-			</audio>
-		</div>
-		<div class="item2">
-			<audio controls>
-				<source src="p240_003_n40_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
-				Your browser does not support the audio element.
-			</audio><br>($T = 0.0$)<br><br>
-			<audio controls>
-				<source src="p240_003_n40_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
-				Your browser does not support the audio element.
-			</audio><br>($T = 0.1$)<br><br>
-			<audio controls>
-				<source src="p240_003_n40_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
-				Your browser does not support the audio element.
-			</audio><br>($T = 0.5$)
-		</div>
-		<div class="item2">
-			<audio controls>
-				<source src="p240_003_n40_0dB_SNR_masked.wav" type="audio/wav">
-				Your browser does not support the audio element.
-			</audio>
-		</div>
-		<div class="item2">
-			<audio controls>
-				<source src="p240_003_n40_0dB_SNR_gatedconv.wav" type="audio/wav">
+			<audio id="player_p226_003_n28_gatedconv" controls="controls">
+				<source id="src_p226_003_n28_gatedconv" src="p226_003_n28_0dB_SNR_gatedconv.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
@@ -294,7 +317,11 @@
 	<br>
     <hr>
     
-    <h2>Clean speech p226_003 mixed with noise n54 at 0dB SNR</h2>
+    <h2>Clean speech p240_003 mixed with noise n40 at <select id="selection_p240_003_n40">
+	  <option value="-7">-7</option>
+	  <option value="0" selected="selected">0</option>
+	  <option value="7">7</option>
+	</select> dB SNR</h2>
 	
 	<div class="grid-container">
 		<div class="item1">Original</div>
@@ -303,44 +330,44 @@
 		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
 		<div class="item1">Proposed [5]</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p226_003_n54_0dB_SNR_uncorrupted.wav" type="audio/wav">
+			<audio id="player_p240_003_n40_uncorrupted" controls="controls">
+				<source id="src_p240_003_n40_uncorrupted" src="p240_003_n40_0dB_SNR_uncorrupted.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>(Clean speech signal)<br><br>
-			<audio controls>
-				<source src="p226_003_n54_0dB_SNR_noisy.wav" type="audio/wav">
+			<audio id="player_p240_003_n40_noisy" controls="controls">
+				<source id="src_p240_003_n40_noisy" src="p240_003_n40_0dB_SNR_noisy.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>(Noisy speech signal)
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p226_003_n54_0dB_SNR_crnn.wav" type="audio/wav">
+			<audio id="player_p240_003_n40_crnn" controls="controls">
+				<source id="src_p240_003_n40_crnn" src="p240_003_n40_0dB_SNR_crnn.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p226_003_n54_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
+			<audio id="player_p240_003_n40_pconv_1" controls="controls">
+				<source id="src_p240_003_n40_pconv_1" src="p240_003_n40_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.0$)<br><br>
-			<audio controls>
-				<source src="p226_003_n54_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
+			<audio id="player_p240_003_n40_pconv_2" controls="controls">
+				<source id="src_p240_003_n40_pconv_2" src="p240_003_n40_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.1$)<br><br>
-			<audio controls>
-				<source src="p226_003_n54_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
+			<audio id="player_p240_003_n40_pconv_6" controls="controls">
+				<source id="src_p240_003_n40_pconv_6" src="p240_003_n40_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.5$)
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p226_003_n54_0dB_SNR_masked.wav" type="audio/wav">
+			<audio id="player_p240_003_n40_masked" controls="controls">
+				<source id="src_p240_003_n40_masked" src="p240_003_n40_0dB_SNR_masked.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p226_003_n54_0dB_SNR_gatedconv.wav" type="audio/wav">
+			<audio id="player_p240_003_n40_gatedconv" controls="controls">
+				<source id="src_p240_003_n40_gatedconv" src="p240_003_n40_0dB_SNR_gatedconv.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
@@ -350,7 +377,11 @@
 	<br>
     <hr>
     
-    <h2>Clean speech p240_003 mixed with noise n67 at 0dB SNR</h2>
+    <h2>Clean speech p226_003 mixed with noise n54 at <select id="selection_p226_003_n54">
+	  <option value="-7">-7</option>
+	  <option value="0" selected="selected">0</option>
+	  <option value="7">7</option>
+	</select> dB SNR</h2>
 	
 	<div class="grid-container">
 		<div class="item1">Original</div>
@@ -359,55 +390,58 @@
 		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
 		<div class="item1">Proposed [5]</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p240_003_n67_0dB_SNR_uncorrupted.wav" type="audio/wav">
+			<audio id="player_p226_003_n54_uncorrupted" controls="controls">
+				<source id="src_p226_003_n54_uncorrupted" src="p226_003_n54_0dB_SNR_uncorrupted.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>(Clean speech signal)<br><br>
-			<audio controls>
-				<source src="p240_003_n67_0dB_SNR_noisy.wav" type="audio/wav">
+			<audio id="player_p226_003_n54_noisy" controls="controls">
+				<source id="src_p226_003_n54_noisy" src="p226_003_n54_0dB_SNR_noisy.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>(Noisy speech signal)
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p240_003_n67_0dB_SNR_crnn.wav" type="audio/wav">
+			<audio id="player_p226_003_n54_crnn" controls="controls">
+				<source id="src_p226_003_n54_crnn" src="p226_003_n54_0dB_SNR_crnn.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p240_003_n67_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
+			<audio id="player_p226_003_n54_pconv_1" controls="controls">
+				<source id="src_p226_003_n54_pconv_1" src="p226_003_n54_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.0$)<br><br>
-			<audio controls>
-				<source src="p240_003_n67_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
+			<audio id="player_p226_003_n54_pconv_2" controls="controls">
+				<source id="src_p226_003_n54_pconv_2" src="p226_003_n54_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.1$)<br><br>
-			<audio controls>
-				<source src="p240_003_n67_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
+			<audio id="player_p226_003_n54_pconv_6" controls="controls">
+				<source id="src_p226_003_n54_pconv_6" src="p226_003_n54_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.5$)
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p240_003_n67_0dB_SNR_masked.wav" type="audio/wav">
+			<audio id="player_p226_003_n54_masked" controls="controls">
+				<source id="src_p226_003_n54_masked" src="p226_003_n54_0dB_SNR_masked.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p240_003_n67_0dB_SNR_gatedconv.wav" type="audio/wav">
+			<audio id="player_p226_003_n54_gatedconv" controls="controls">
+				<source id="src_p226_003_n54_gatedconv" src="p226_003_n54_0dB_SNR_gatedconv.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
 	</div>
-	
 	
 	
 	<br>
     <hr>
     
-    <h2>Clean speech p226_003 mixed with noise n77 at 0dB SNR</h2>
+    <h2>Clean speech p240_003 mixed with noise n67 at <select id="selection_p240_003_n67">
+	  <option value="-7">-7</option>
+	  <option value="0" selected="selected">0</option>
+	  <option value="7">7</option>
+	</select> dB SNR</h2>
 	
 	<div class="grid-container">
 		<div class="item1">Original</div>
@@ -416,55 +450,118 @@
 		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
 		<div class="item1">Proposed [5]</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p226_003_n77_0dB_SNR_uncorrupted.wav" type="audio/wav">
+			<audio id="player_p240_003_n67_uncorrupted" controls="controls">
+				<source id="src_p240_003_n67_uncorrupted" src="p240_003_n67_0dB_SNR_uncorrupted.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>(Clean speech signal)<br><br>
-			<audio controls>
-				<source src="p226_003_n77_0dB_SNR_noisy.wav" type="audio/wav">
+			<audio id="player_p240_003_n67_noisy" controls="controls">
+				<source id="src_p240_003_n67_noisy" src="p240_003_n67_0dB_SNR_noisy.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>(Noisy speech signal)
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p226_003_n77_0dB_SNR_crnn.wav" type="audio/wav">
+			<audio id="player_p240_003_n67_crnn" controls="controls">
+				<source id="src_p240_003_n67_crnn" src="p240_003_n67_0dB_SNR_crnn.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p226_003_n77_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
+			<audio id="player_p240_003_n67_pconv_1" controls="controls">
+				<source id="src_p240_003_n67_pconv_1" src="p240_003_n67_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.0$)<br><br>
-			<audio controls>
-				<source src="p226_003_n77_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
+			<audio id="player_p240_003_n67_pconv_2" controls="controls">
+				<source id="src_p240_003_n67_pconv_2" src="p240_003_n67_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.1$)<br><br>
-			<audio controls>
-				<source src="p226_003_n77_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
+			<audio id="player_p240_003_n67_pconv_6" controls="controls">
+				<source id="src_p240_003_n67_pconv_6" src="p240_003_n67_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.5$)
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p226_003_n77_0dB_SNR_masked.wav" type="audio/wav">
+			<audio id="player_p240_003_n67_masked" controls="controls">
+				<source id="src_p240_003_n67_masked" src="p240_003_n67_0dB_SNR_masked.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p226_003_n77_0dB_SNR_gatedconv.wav" type="audio/wav">
+			<audio id="player_p240_003_n67_gatedconv" controls="controls">
+				<source id="src_p240_003_n67_gatedconv" src="p240_003_n67_0dB_SNR_gatedconv.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
 	</div>
 	
 	
+	<br>
+    <hr>
     
+    <h2>Clean speech p226_003 mixed with noise n77 at <select id="selection_p226_003_n77">
+	  <option value="-7">-7</option>
+	  <option value="0" selected="selected">0</option>
+	  <option value="7">7</option>
+	</select> dB SNR</h2>
+	
+	<div class="grid-container">
+		<div class="item1">Original</div>
+		<div class="item1">CRNN [4]</div>  
+		<div class="item1">PConv [3]</div>
+		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
+		<div class="item1">Proposed [5]</div>
+		<div class="item2">
+			<audio id="player_p226_003_n77_uncorrupted" controls="controls">
+				<source id="src_p226_003_n77_uncorrupted" src="p226_003_n77_0dB_SNR_uncorrupted.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>(Clean speech signal)<br><br>
+			<audio id="player_p226_003_n77_noisy" controls="controls">
+				<source id="src_p226_003_n77_noisy" src="p226_003_n77_0dB_SNR_noisy.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>(Noisy speech signal)
+		</div>
+		<div class="item2">
+			<audio id="player_p226_003_n77_crnn" controls="controls">
+				<source id="src_p226_003_n77_crnn" src="p226_003_n77_0dB_SNR_crnn.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+		<div class="item2">
+			<audio id="player_p226_003_n77_pconv_1" controls="controls">
+				<source id="src_p226_003_n77_pconv_1" src="p226_003_n77_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.0$)<br><br>
+			<audio id="player_p226_003_n77_pconv_2" controls="controls">
+				<source id="src_p226_003_n77_pconv_2" src="p226_003_n77_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.1$)<br><br>
+			<audio id="player_p226_003_n77_pconv_6" controls="controls">
+				<source id="src_p226_003_n77_pconv_6" src="p226_003_n77_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio><br>($T = 0.5$)
+		</div>
+		<div class="item2">
+			<audio id="player_p226_003_n77_masked" controls="controls">
+				<source id="src_p226_003_n77_masked" src="p226_003_n77_0dB_SNR_masked.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+		<div class="item2">
+			<audio id="player_p226_003_n77_gatedconv" controls="controls">
+				<source id="src_p226_003_n77_gatedconv" src="p226_003_n77_0dB_SNR_gatedconv.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+		</div>
+	</div>
+	
+	
 	<br>
     <hr>
 	
-    <h2>Clean speech p240_003 mixed with noise n85 at 0dB SNR</h2>
+    <h2>Clean speech p240_003 mixed with noise n85 at <select id="selection_p240_003_n85">
+	  <option value="-7">-7</option>
+	  <option value="0" selected="selected">0</option>
+	  <option value="7">7</option>
+	</select> dB SNR</h2>
 	
 	<div class="grid-container">
 		<div class="item1">Original</div>
@@ -473,48 +570,49 @@
 		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
 		<div class="item1">Proposed [5]</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p240_003_n85_0dB_SNR_uncorrupted.wav" type="audio/wav">
+			<audio id="player_p240_003_n85_uncorrupted" controls="controls">
+				<source id="src_p240_003_n85_uncorrupted" src="p240_003_n85_0dB_SNR_uncorrupted.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>(Clean speech signal)<br><br>
-			<audio controls>
-				<source src="p240_003_n85_0dB_SNR_noisy.wav" type="audio/wav">
+			<audio id="player_p240_003_n85_noisy" controls="controls">
+				<source id="src_p240_003_n85_noisy" src="p240_003_n85_0dB_SNR_noisy.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>(Noisy speech signal)
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p240_003_n85_0dB_SNR_crnn.wav" type="audio/wav">
+			<audio id="player_p240_003_n85_crnn" controls="controls">
+				<source id="src_p240_003_n85_crnn" src="p240_003_n85_0dB_SNR_crnn.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p240_003_n85_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
+			<audio id="player_p240_003_n85_pconv_1" controls="controls">
+				<source id="src_p240_003_n85_pconv_1" src="p240_003_n85_0dB_SNR_pconv_T=0.0.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.0$)<br><br>
-			<audio controls>
-				<source src="p240_003_n85_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
+			<audio id="player_p240_003_n85_pconv_2" controls="controls">
+				<source id="src_p240_003_n85_pconv_2" src="p240_003_n85_0dB_SNR_pconv_T=0.1.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.1$)<br><br>
-			<audio controls>
-				<source src="p240_003_n85_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
+			<audio id="player_p240_003_n85_pconv_6" controls="controls">
+				<source id="src_p240_003_n85_pconv_6" src="p240_003_n85_0dB_SNR_pconv_T=0.5.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio><br>($T = 0.5$)
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p240_003_n85_0dB_SNR_masked.wav" type="audio/wav">
+			<audio id="player_p240_003_n85_masked" controls="controls">
+				<source id="src_p240_003_n85_masked" src="p240_003_n85_0dB_SNR_masked.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
 		<div class="item2">
-			<audio controls>
-				<source src="p240_003_n85_0dB_SNR_gatedconv.wav" type="audio/wav">
+			<audio id="player_p240_003_n85_gatedconv" controls="controls">
+				<source id="src_p240_003_n85_gatedconv" src="p240_003_n85_0dB_SNR_gatedconv.wav" type="audio/wav">
 				Your browser does not support the audio element.
 			</audio>
 		</div>
 	</div>
+	
 	
 	<br>
     <hr>
@@ -524,6 +622,6 @@
 	[2] Guoning Hu and DeLiangWang, “A tandem algorithm for pitch estimation and voiced speech segregation,” in IEEE Transactions on Audio, Speech, and Language Processing, vol. 18, no.8, pp. 2067-2079, 2010.<br>
 	[3] Xiang Hao, Xiangdong Su, Shixue Wen, Zhiyu Wang, Yiqian Pan, Feilong Bao, and Wei Chen, “Masking and inpainting: A two-stage speech enhancement approach for low SNR and non-stationary noise,” in IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2020, pp. 6959–6963.<br>
 	[4] Ke Tan and DeLiang Wang, “A convolutional recurrent neural network for real-time speech enhancement,” in Interspeech, 2018, pp. 3229–3233.<br>
-	[5] Lars Thieling and Peter Jax, “Two-Stage Speech Enhancement Using Gated Convolutions,” (Submitted to IWAENC2022).<br>
+	[5] Lars Thieling and Peter Jax, “Two-stage speech enhancement using gated convolutions,” (Submitted to IWAENC2022).<br>
   </body>
 </html>
