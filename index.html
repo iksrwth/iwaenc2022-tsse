@@ -127,7 +127,7 @@
 	<ul>
 	  <li>CRNN: Use a convolutional recurrent neural network as described in [4] for direct estimation of $|\hat{S}|$.</li>
 	  <li>PConv: Two-stage speech enhancement using our proposed model $\mathcal{M}^\star_{\text{SMM}}$ [5] for mask estimation and the partial convolution-based architecture from [3] for inpainting.</li>
-	  <li>Proposed $\mathcal{M}_{\text{SMM}^\star}$: Use the estimated soft mask from our proposed masking model $\mathcal{M}_{\text{SMM}^\star}$ for masking, i.e., skip the inpainting stage (see [5]).</li>
+	  <li>Proposed $\mathcal{M}^\star_{\text{SMM}}$: Use the estimated soft mask from our proposed masking model $\mathcal{M}^\star_{\text{SMM}}$ for masking, i.e., skip the inpainting stage (see [5]).</li>
 	  <li>Proposed GConv: Two-stage speech enhancement using our proposed model $\mathcal{M}^\star_{\text{SMM}}$ for mask estimation and our proposed gated convolution-based architecture for inpainting (see [5]).</li>
 	</ul>
 	Afterwards the estimated speech magnitude spectrum $|\hat{S}|$ and the noisy phase spectrum $\phi$ are combined and passed into an inverse short-time Fourier transform (ISTFT) in oder to achieve the enhanced signal $\hat{s}$.
@@ -147,8 +147,8 @@
 		<div class="item1">Original</div>
 		<div class="item1">CRNN [4]</div>  
 		<div class="item1">PConv [3]</div>
-		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
-		<div class="item1">Proposed [5]</div>
+		<div class="item1">Proposed $\mathcal{M}^\star_{\text{SMM}}$ [5]</div>
+		<div class="item1">Proposed GConv [5]</div>
 		<div class="item2">
 			<audio id="player_p226_003_n11_uncorrupted" controls="controls">
 				<source id="src_p226_003_n11_uncorrupted" src="p226_003_n11_0dB_SNR_uncorrupted.wav" type="audio/wav">
@@ -207,8 +207,8 @@
 		<div class="item1">Original</div>
 		<div class="item1">CRNN [4]</div>  
 		<div class="item1">PConv [3]</div>
-		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
-		<div class="item1">Proposed [5]</div>
+		<div class="item1">Proposed $\mathcal{M}^\star_{\text{SMM}}$ [5]</div>
+		<div class="item1">Proposed GConv [5]</div>
 		<div class="item2">
 			<audio id="player_p240_003_n12_uncorrupted" controls="controls">
 				<source id="src_p240_003_n12_uncorrupted" src="p240_003_n12_0dB_SNR_uncorrupted.wav" type="audio/wav">
@@ -267,8 +267,8 @@
 		<div class="item1">Original</div>
 		<div class="item1">CRNN [4]</div>  
 		<div class="item1">PConv [3]</div>
-		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
-		<div class="item1">Proposed [5]</div>
+		<div class="item1">Proposed $\mathcal{M}^\star_{\text{SMM}}$ [5]</div>
+		<div class="item1">Proposed GConv [5]</div>
 		<div class="item2">
 			<audio id="player_p226_003_n28_uncorrupted" controls="controls">
 				<source id="src_p226_003_n28_uncorrupted" src="p226_003_n28_0dB_SNR_uncorrupted.wav" type="audio/wav">
@@ -327,8 +327,8 @@
 		<div class="item1">Original</div>
 		<div class="item1">CRNN [4]</div>  
 		<div class="item1">PConv [3]</div>
-		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
-		<div class="item1">Proposed [5]</div>
+		<div class="item1">Proposed $\mathcal{M}^\star_{\text{SMM}}$ [5]</div>
+		<div class="item1">Proposed GConv [5]</div>
 		<div class="item2">
 			<audio id="player_p240_003_n40_uncorrupted" controls="controls">
 				<source id="src_p240_003_n40_uncorrupted" src="p240_003_n40_0dB_SNR_uncorrupted.wav" type="audio/wav">
@@ -387,8 +387,8 @@
 		<div class="item1">Original</div>
 		<div class="item1">CRNN [4]</div>  
 		<div class="item1">PConv [3]</div>
-		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
-		<div class="item1">Proposed [5]</div>
+		<div class="item1">Proposed $\mathcal{M}^\star_{\text{SMM}}$ [5]</div>
+		<div class="item1">Proposed GConv [5]</div>
 		<div class="item2">
 			<audio id="player_p226_003_n54_uncorrupted" controls="controls">
 				<source id="src_p226_003_n54_uncorrupted" src="p226_003_n54_0dB_SNR_uncorrupted.wav" type="audio/wav">
@@ -447,8 +447,8 @@
 		<div class="item1">Original</div>
 		<div class="item1">CRNN [4]</div>  
 		<div class="item1">PConv [3]</div>
-		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
-		<div class="item1">Proposed [5]</div>
+		<div class="item1">Proposed $\mathcal{M}^\star_{\text{SMM}}$ [5]</div>
+		<div class="item1">Proposed GConv [5]</div>
 		<div class="item2">
 			<audio id="player_p240_003_n67_uncorrupted" controls="controls">
 				<source id="src_p240_003_n67_uncorrupted" src="p240_003_n67_0dB_SNR_uncorrupted.wav" type="audio/wav">
@@ -507,8 +507,8 @@
 		<div class="item1">Original</div>
 		<div class="item1">CRNN [4]</div>  
 		<div class="item1">PConv [3]</div>
-		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
-		<div class="item1">Proposed [5]</div>
+		<div class="item1">Proposed $\mathcal{M}^\star_{\text{SMM}}$ [5]</div>
+		<div class="item1">Proposed GConv [5]</div>
 		<div class="item2">
 			<audio id="player_p226_003_n77_uncorrupted" controls="controls">
 				<source id="src_p226_003_n77_uncorrupted" src="p226_003_n77_0dB_SNR_uncorrupted.wav" type="audio/wav">
@@ -567,8 +567,8 @@
 		<div class="item1">Original</div>
 		<div class="item1">CRNN [4]</div>  
 		<div class="item1">PConv [3]</div>
-		<div class="item1">$\mathcal{M}_{\text{SMM}^\star}$ [5]</div>
-		<div class="item1">Proposed [5]</div>
+		<div class="item1">Proposed $\mathcal{M}^\star_{\text{SMM}}$ [5]</div>
+		<div class="item1">Proposed GConv [5]</div>
 		<div class="item2">
 			<audio id="player_p240_003_n85_uncorrupted" controls="controls">
 				<source id="src_p240_003_n85_uncorrupted" src="p240_003_n85_0dB_SNR_uncorrupted.wav" type="audio/wav">
@@ -622,6 +622,6 @@
 	[2] Guoning Hu and DeLiangWang, “A tandem algorithm for pitch estimation and voiced speech segregation,” in IEEE Transactions on Audio, Speech, and Language Processing, vol. 18, no.8, pp. 2067-2079, 2010.<br>
 	[3] Xiang Hao, Xiangdong Su, Shixue Wen, Zhiyu Wang, Yiqian Pan, Feilong Bao, and Wei Chen, “Masking and inpainting: A two-stage speech enhancement approach for low SNR and non-stationary noise,” in IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2020, pp. 6959–6963.<br>
 	[4] Ke Tan and DeLiang Wang, “A convolutional recurrent neural network for real-time speech enhancement,” in Interspeech, 2018, pp. 3229–3233.<br>
-	[5] Lars Thieling and Peter Jax, “Two-stage speech enhancement using gated convolutions,” (Submitted to IWAENC2022).<br>
+	[5] Lars Thieling and Peter Jax, “Two-stage speech enhancement using gated convolutions,” in International Workshop on Acoustic Signal Enhancement (IWAENC), 2022.<br>
   </body>
 </html>
