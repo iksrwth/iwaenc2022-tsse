@@ -126,9 +126,9 @@
 	<p>The following methods were used to determine the estimated speech magnitude spectrum $|\hat{S}|$:
 	<ul>
 	  <li>CRNN: Use a convolutional recurrent neural network as described in [4] for direct estimation of $|\hat{S}|$.</li>
-	  <li>PConv: Two-stage speech enhancement using our proposed model $\mathcal{M}_{\text{SMM}^\star}$ [5] for mask estimation and the partial convolution-based architecture from [3] for inpainting.</li>
-	  <li>$\mathcal{M}_{\text{SMM}^\star}$: Use the estimated soft mask from our proposed masking model $\mathcal{M}_{\text{SMM}^\star}$ for masking, i.e., skip the inpainting stage (see [5]).</li>
-	  <li>Proposed: Two-stage speech enhancement using our proposed model $\mathcal{M}_{\text{SMM}^\star}$ for mask estimation and our proposed gated convolution-based architecture for inpainting (see [5]).</li>
+	  <li>PConv: Two-stage speech enhancement using our proposed model $\mathcal{M}^\star_{\text{SMM}}$ [5] for mask estimation and the partial convolution-based architecture from [3] for inpainting.</li>
+	  <li>Proposed $\mathcal{M}_{\text{SMM}^\star}$: Use the estimated soft mask from our proposed masking model $\mathcal{M}_{\text{SMM}^\star}$ for masking, i.e., skip the inpainting stage (see [5]).</li>
+	  <li>Proposed GConv: Two-stage speech enhancement using our proposed model $\mathcal{M}^\star_{\text{SMM}}$ for mask estimation and our proposed gated convolution-based architecture for inpainting (see [5]).</li>
 	</ul>
 	Afterwards the estimated speech magnitude spectrum $|\hat{S}|$ and the noisy phase spectrum $\phi$ are combined and passed into an inverse short-time Fourier transform (ISTFT) in oder to achieve the enhanced signal $\hat{s}$.
 	It is worth noting that all models were trained using the same training set.</p>
